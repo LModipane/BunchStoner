@@ -1,27 +1,21 @@
-import { client as SanityClient } from '@/sanity/lib/client';
 import Link from 'next/link';
-import {
-	FaBold,
-	FaFacebookF,
-	FaTiktok,
-	FaTwitter,
-	FaRegHeart,
-	FaHeart,
-	FaShare,
-} from 'react-icons/fa';
-import { IoLogoWhatsapp } from 'react-icons/io';
-import { MdOutlineLocalGroceryStore } from 'react-icons/md';
-import { GiEgyptianProfile } from 'react-icons/gi';
-import { GiChestnutLeaf } from 'react-icons/gi';
 import Image from 'next/image';
+import { IoLogoWhatsapp } from 'react-icons/io';
+import { GiChestnutLeaf } from 'react-icons/gi';
+import { GiEgyptianProfile } from 'react-icons/gi';
+import { MdOutlineLocalGroceryStore } from 'react-icons/md';
+import { client as SanityClient } from '@/sanity/lib/client';
+
+import { FaHeart, FaShare, FaTiktok, FaTwitter, FaRegHeart, FaFacebookF } from 'react-icons/fa';
 
 type HeroType = {
 	heroHeading: string;
-	heroSubheading: string;
-	heroProductImageUrl: string;
+	logoImageUrl: string;
 	noticeBanner: string;
 	contactNumber: string;
+	heroSubheading: string;
 	heroProductTitle: string;
+	heroProductImageUrl: string;
 	heroProductDescription: string;
 };
 
@@ -34,6 +28,7 @@ export default async function Home() {
 		heroProductDescription,
 		noticeBanner,
 		contactNumber,
+		"logoImageUrl": logoImage.asset->url
 		}`;
 
 	const {
@@ -44,6 +39,7 @@ export default async function Home() {
 		heroProductImageUrl,
 		heroProductTitle,
 		heroProductDescription,
+		logoImageUrl,
 	} = await SanityClient.fetch<HeroType>(query);
 
 	return (
@@ -64,10 +60,12 @@ export default async function Home() {
 				</div>
 			</div>
 			<nav className="w-full h-20 bg-white text-black flex items-center p-3 justify-between">
-				<h1 className="text-lg font-bold flex items-center gap-x-2">
-					<FaBold className="text-amber-300 bg-green-950 p-1 rounded-full h-7 w-7" />
-					Bunch Stoners
-				</h1>
+				<Link href="/" className="text-lg font-bold flex items-center gap-x-2">
+					<div className="relative w-7 h-7">
+						<Image src={logoImageUrl} alt="Bunch Stoners Logo" fill className="object-fill" />
+					</div>
+					<h1>Bunch Stoners</h1>
+				</Link>
 				<div className="flex items-center gap-x-6 text-md text-gray-700 text-lg font-extralight">
 					<Link href="#">Home</Link>
 					<Link href="#">Shop</Link>
@@ -91,10 +89,10 @@ export default async function Home() {
 					<h1 className="text-black text-4xl font-extrabold">{heroHeading}</h1>
 					<h2 className="text-gray-700 text-xl font-medium">{heroSubheading}</h2>
 					<div className="">
-						<button className="bg-green-950 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-900 transition">
-							Shop Now
+						<button className="bg-green-950 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-900 transition cursor-pointer">
+							Checkout
 						</button>
-						<button className="bg-green-950 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-900 transition ml-4">
+						<button className="text-green-950 px-6 py-3 ml-4 underline font-medium hover:text-green-800 transition cursor-pointer">
 							Learn More
 						</button>
 					</div>

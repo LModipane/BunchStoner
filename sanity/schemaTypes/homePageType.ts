@@ -11,6 +11,11 @@ export const homePageType = defineType({
 			type: 'string',
 		}),
 		defineField({
+			name: 'logoImage',
+			title: 'Logo Image',
+			type: 'image',
+		}),
+		defineField({
 			name: 'heroHeading',
 			title: 'Hero Heading',
 			type: 'string',

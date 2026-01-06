@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	title: 'Bunch Stoners',
 	description: 'A Cannabis Dispensary, Delivery, and Lifestyle Brand.',
+	// `icons: {
+	// 	icon: "/favicon.ico",
+	// }`
 };
 
 export default function RootLayout({
