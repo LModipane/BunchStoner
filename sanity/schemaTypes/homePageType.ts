@@ -21,12 +21,22 @@ export const homePageType = defineType({
 			type: 'string',
 		}),
 		defineField({
-			name: 'heroImage',
-			title: 'Hero Image',
+			name: 'heroProductImage',
+			title: 'Hero Product Image',
 			type: 'image',
 			options: {
 				hotspot: true,
 			},
+		}),
+		defineField({
+			name: 'heroProductTitle',
+			title: 'Hero Product Title',
+			type: 'string',
+		}),
+		defineField({
+			name: 'heroProductDescription',
+			title: 'Hero Product Description',
+			type: 'text',
 		}),
 		defineField({
 			name: 'noticeBanner',
