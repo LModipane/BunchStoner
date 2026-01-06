@@ -6,7 +6,7 @@ import { GiEgyptianProfile } from 'react-icons/gi';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 import { client as SanityClient } from '@/sanity/lib/client';
 
-import { FaHeart, FaShare, FaTiktok, FaTwitter, FaRegHeart, FaFacebookF } from 'react-icons/fa';
+import { FaHeart, FaShare, FaRegHeart, FaFacebookF } from 'react-icons/fa';
 
 type HeroType = {
 	heroHeading: string;
@@ -57,8 +57,6 @@ export default async function Home() {
 				<div className="ml-20 flex gap-x-3">
 					<FaFacebookF className="w-5 h-5 rounded-full bg-amber-300 text-green-950 p-0.5 cursor-pointer" />
 					<IoLogoWhatsapp className="w-5 h-5 rounded-full bg-amber-300 text-green-950 p-0.5 cursor-pointer" />
-					<FaTiktok className="w-5 h-5 rounded-full bg-amber-300 text-green-950 p-0.5 cursor-pointer" />
-					<FaTwitter className="w-5 h-5 rounded-full bg-amber-300 text-green-950 p-0.5 cursor-pointer" />
 				</div>
 			</div>
 			<nav className="w-full h-20 bg-white text-black flex items-center p-3 justify-between">
