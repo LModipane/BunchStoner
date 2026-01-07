@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity';
 
-export const homePageType = defineType({
+export default defineType({
 	name: 'HeroProducts',
 	title: 'Hero Products',
 	type: 'document',
