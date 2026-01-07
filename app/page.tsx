@@ -28,7 +28,7 @@ type Product = {
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
-	const heroProductQuery = `*[_type == "homePage"][0]{
+	const heroProductQuery = `*[_type == "HeroProducts"][0]{
 		heroHeading,
 		heroSubheading,
 		"heroProductImageUrl": heroProductImage.asset->url,
