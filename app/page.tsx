@@ -19,10 +19,16 @@ type HeroType = {
 	heroProductDescription: string;
 };
 
+type Product = {
+	slug: string;
+	name: string;
+	coverImageUrl: string;
+};
+
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
-	const query = `*[_type == "homePage"][0]{
+	const heroProductQuery = `*[_type == "homePage"][0]{
 		heroHeading,
 		heroSubheading,
 		"heroProductImageUrl": heroProductImage.asset->url,
@@ -42,7 +48,15 @@ export default async function Home() {
 		heroProductTitle,
 		heroProductDescription,
 		logoImageUrl,
-	} = await SanityClient.fetch<HeroType>(query);
+	} = await SanityClient.fetch<HeroType>(heroProductQuery);
+
+	const inventoryQuery = `*[_type == "inventory"]{
+		"slug": slug.current,
+		name,
+		"coverImageUrl": mainImage.asset -> url,
+	}`;
+
+	const inventory = await SanityClient.fetch<Product[]>(inventoryQuery);
 
 	return (
 		<main className="w-full flex flex-col items-center bg-amber-50">
@@ -93,7 +107,7 @@ export default async function Home() {
 							Checkout
 						</button>
 						<button className="text-green-950 px-6 py-3 ml-4 underline font-medium hover:text-green-800 transition cursor-pointer">
-							Learn More
+							Explore
 						</button>
 					</div>
 				</div>
@@ -120,7 +134,45 @@ export default async function Home() {
 					</div>
 				</div>
 			</header>
-			<section className="h-screen w-full bg-white"> category</section>
+			<section className="min-h-screen w-full bg-white text-black flex flex-col items-center">
+				<div className="flex flex-col items-center mt-5 px-4 text-center">
+					<h2 className="text-3xl font-extrabold mt-20 text-green-950">Product Collections</h2>
+					<p className="text-gray-500 text-lg mt-4 mb-5">
+						Explore our handpicked selection of top-quality products.
+					</p>
+				</div>
+				<div className="flex justify-center items-center gap-8 mt-5">
+					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
+						Techware
+					</div>
+					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
+						Footware & Apparel
+					</div>
+					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
+						Strategy & Puzzle Games
+					</div>
+					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
+						Travel & Hydration
+					</div>
+					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
+						Accessories & Timer
+					</div>
+				</div>
+				<div className="flex flex-wrap gap-8 justify-center items-center mt-10 mb-20">
+					{inventory.map(product => (
+						<div key={product.slug} className=" h-75 w-75 flex flex-col justify-center">
+							<div className="relative h-75 w-75 border-2 border-red-500 p-2 m-1">
+								<Image
+									src={product.coverImageUrl}
+									alt={product.slug + '-Image'}
+									fill
+									className="object-cover object-center"
+								/>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
 			<footer className="h-screen w-full bg-green-950 text-white flex items-end justify-center">
 				<p>Bunch Stoners &copy; 2024. All rights reserved.</p>
 			</footer>
