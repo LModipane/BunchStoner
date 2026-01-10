@@ -1,7 +1,7 @@
-import { type SchemaTypeDefinition } from 'sanity';
 import heroProductType from './heroProductType';
-import inventoryType from './inventoryType';
+import { type SchemaTypeDefinition } from 'sanity';
+import inventoryType, { categoryEnumType} from './inventoryType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-	types: [heroProductType, inventoryType],
+	types: [heroProductType, inventoryType, categoryEnumType],
 };
