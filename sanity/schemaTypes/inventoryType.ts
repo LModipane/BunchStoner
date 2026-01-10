@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { PRODUCT_CATEGORIES } from '@/constants';
 
 export default defineType({
 	name: 'inventory',
@@ -65,10 +66,6 @@ export const categoryEnumType = defineType({
 	title: 'Category Enum',
 	type: 'string',
 	options: {
-		list: [
-			{ title: 'Cannabis', value: 'cannabis' },
-			{ title: 'Accessories', value: 'accessories' },
-			{ title: 'Edibles', value: 'edibles' },
-		],
+		list: PRODUCT_CATEGORIES.map(category => ({ title: category, value: category })),
 	},
 });
