@@ -2,10 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { GiChestnutLeaf } from 'react-icons/gi';
+import { PRODUCT_CATEGORIES } from '@/constants';
 import { GiEgyptianProfile } from 'react-icons/gi';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 import { client as SanityClient } from '@/sanity/lib/client';
-
 import { FaHeart, FaShare, FaRegHeart, FaFacebookF } from 'react-icons/fa';
 
 type HeroType = {
@@ -148,21 +148,13 @@ export default async function Home() {
 					</p>
 				</div>
 				<div className="flex justify-center items-center gap-8 mt-5">
-					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
-						Techware
-					</div>
-					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
-						Footware & Apparel
-					</div>
-					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
-						Strategy & Puzzle Games
-					</div>
-					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
-						Travel & Hydration
-					</div>
-					<div className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize">
-						Accessories & Timer
-					</div>
+					{PRODUCT_CATEGORIES.map(category => (
+						<div
+							key={category}
+							className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize hover:bg-green-950 hover:text-white transition ">
+							{category}
+						</div>
+					))}
 				</div>
 				<div className="flex flex-wrap gap-8 justify-center items-center mt-10 mb-20">
 					{inventory.map(product => (
