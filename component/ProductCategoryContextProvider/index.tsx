@@ -1,9 +1,9 @@
 'use client';
-import React, { createContext, useState } from 'react';
+import React, { createContext, Dispatch, useState } from 'react';
 
 type ProductCategoryContextType = {
 	selectedCategory: string | null;
-	setSelectedCategory: (category: string | null) => void;
+	setSelectedCategory: Dispatch<React.SetStateAction<string | null>>;
 };
 
 export const ProductCategoryContext = createContext<ProductCategoryContextType | undefined>(undefined);
