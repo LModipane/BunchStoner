@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Product } from '@/types';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { GiChestnutLeaf } from 'react-icons/gi';
 import { PRODUCT_CATEGORIES } from '@/constants';
 import { GiEgyptianProfile } from 'react-icons/gi';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 import { client as SanityClient } from '@/sanity/lib/client';
+import { FilterCategoryButton, FilteredProducts } from '@/component';
 import { FaHeart, FaShare, FaRegHeart, FaFacebookF } from 'react-icons/fa';
 import ProductCategoryContextProvider from '@/component/ProductCategoryContextProvider';
-import { FilterCategoryButton, FilteredProducts } from '@/component';
-import { Product } from '@/types';
 
 type HeroType = {
 	heroHeading: string;
@@ -107,9 +107,9 @@ export default async function Home() {
 						<button className="bg-green-950 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-900 transition cursor-pointer">
 							Checkout
 						</button>
-						<button className="text-green-950 px-6 py-3 ml-4 underline font-medium hover:text-green-800 transition cursor-pointer">
+						<a href="#collections" className="text-green-950 px-6 py-3 ml-4 underline font-medium hover:text-green-800 transition cursor-pointer">
 							Explore
-						</button>
+						</a>
 					</div>
 				</div>
 				<div className="h-full w-1/2">
@@ -135,7 +135,7 @@ export default async function Home() {
 					</div>
 				</div>
 			</header>
-			<section className="min-h-screen w-full bg-white text-black flex flex-col items-center">
+			<section id="collections" className="min-h-screen w-full bg-white text-black flex flex-col items-center">
 				<div className="flex flex-col items-center mt-5 px-4 text-center">
 					<h2 className="text-3xl font-extrabold mt-20 text-green-950">Product Collections</h2>
 					<p className="text-gray-500 text-lg mt-4 mb-5">
