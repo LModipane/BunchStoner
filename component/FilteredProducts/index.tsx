@@ -55,7 +55,7 @@ const ProductCard = ({
 						<span className="text-green-900 text-2xl">R {price}</span>
 						{discount > 0 && (
 							<span className="text-gray-500 line-through">
-								R {(price / (1 - discount / 100)).toFixed(2)}
+								R {(price + (price * discount / 100)).toFixed(2)}
 							</span>
 						)}
 					</div>
