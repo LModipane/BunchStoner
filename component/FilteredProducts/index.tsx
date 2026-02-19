@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/types';
 import { FaHeart } from 'react-icons/fa';
@@ -22,12 +23,12 @@ const FilteredProducts = ({ products }: { products: Product[] }) => {
 export default FilteredProducts;
 
 const ProductCard = ({
-	product: { coverImageUrl, name, description, price, discount },
+	product: { coverImageUrl, name, description, price, discount, slug },
 }: {
 	product: Product;
 }) => {
 	return (
-		<div className=" h-fit w-75 flex flex-col justify-center bg-orange-100 px-3 py-2 m-1 rounded-md">
+		<Link href={`/product/${slug}`}	 className=" h-fit w-75 flex flex-col justify-center bg-orange-100 px-3 py-2 m-1 rounded-md">
 			<div className="">
 				<div className="relative w-full h-62 z-10 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition">
 					<Image
@@ -63,6 +64,6 @@ const ProductCard = ({
 					</button>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
