@@ -7,6 +7,9 @@ import { GiEgyptianProfile } from 'react-icons/gi';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 import { client as SanityClient } from '@/sanity/lib/client';
 import { FaHeart, FaShare, FaRegHeart, FaFacebookF } from 'react-icons/fa';
+import ProductCategoryContextProvider from '@/component/ProductCategoryContextProvider';
+import { FilterCategoryButton, FilteredProducts } from '@/component';
+import { Product } from '@/types';
 
 type HeroType = {
 	heroHeading: string;
@@ -17,15 +20,6 @@ type HeroType = {
 	heroProductTitle: string;
 	heroProductImageUrl: string;
 	heroProductDescription: string;
-};
-
-type Product = {
-	slug: string;
-	name: string;
-	price: number;
-	discount: number;
-	description: string;
-	coverImageUrl: string;
 };
 
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -56,6 +50,7 @@ export default async function Home() {
 	const inventoryQuery = `*[_type == "inventory"]{
 		name,
 		price,
+		category,
 		discount,
 		description,
 		"slug": slug.current,
@@ -147,20 +142,14 @@ export default async function Home() {
 						Explore our handpicked selection of top-quality products.
 					</p>
 				</div>
-				<div className="flex justify-center items-center gap-8 mt-5">
-					{PRODUCT_CATEGORIES.map(category => (
-						<div
-							key={category}
-							className="border-2 border-green-950 rounded-2xl p-3 text-lg text-light cursor-pointer capitalize hover:bg-green-950 hover:text-white transition ">
-							{category}
-						</div>
-					))}
-				</div>
-				<div className="flex flex-wrap gap-8 justify-center items-center mt-10 mb-20">
-					{inventory.map(product => (
-						<ProductCard key={product.slug} product={product} />
-					))}
-				</div>
+				<ProductCategoryContextProvider>
+					<div className="flex justify-center items-center gap-8 mt-5">
+						{PRODUCT_CATEGORIES.map(category => (
+							<FilterCategoryButton key={category} category={category} />
+						))}
+					</div>
+					<FilteredProducts products={inventory} />
+				</ProductCategoryContextProvider>
 			</section>
 			<footer className="h-screen w-full bg-green-950 text-white flex items-end justify-center">
 				<p>Bunch Stoners &copy; 2024. All rights reserved.</p>
@@ -169,48 +158,4 @@ export default async function Home() {
 	);
 }
 
-const ProductCard = ({
-	product: { coverImageUrl, name, description, price, discount },
-}: {
-	product: Product;
-}) => {
-	return (
-		<div className=" h-fit w-75 flex flex-col justify-center bg-orange-100 px-3 py-2 m-1 rounded-md">
-			<div className="">
-				<div className="relative w-full h-62 z-10 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition">
-					<Image
-						fill
-						src={coverImageUrl}
-						alt={name + ' Image-Card'}
-						className="object-center object-cover"
-					/>
-					{discount > 0 && (
-						<div className="absolute top-3 left-3 z-20 bg-red-500 text-white px-2 py-1 rounded-br-lg">
-							{discount}%
-						</div>
-					)}
-					<div className="absolute top-3 right-3 z-20">
-						<FaHeart className="w-7 h-7 text-red-500 drop-shadow-lg cursor-pointer" />
-					</div>
-				</div>
-			</div>
-			<div className="flex flex-col mt-3">
-				<h4>{name}</h4>
-				<p className="text-gray-500 text-sm font-light line-clamp-2 w-full">{description}</p>
-				<div className="flex justify-between items-center mt-2">
-					<div className="flex items-center justify-between gap-x-2 ">
-						<span className="text-green-900 text-2xl">R {price}</span>
-						{discount > 0 && (
-							<span className="text-gray-500 line-through">
-								R {(price / (1 - discount / 100)).toFixed(2)}
-							</span>
-						)}
-					</div>
-					<button className="bg-green-900 text-white px-4 py-1 rounded-full text-sm hover:bg-green-900 transition cursor-pointer">
-						Checkout
-					</button>
-				</div>
-			</div>
-		</div>
-	);
-};
+
