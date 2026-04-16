@@ -8,14 +8,20 @@ import { useProductCategoryContext } from '@/hooks';
 
 const FilteredProducts = ({ products }: { products: Product[] }) => {
 	const { selectedCategory } = useProductCategoryContext();
+
 	const filteredProducts = selectedCategory
 		? products.filter(product => product.category === selectedCategory)
 		: products;
+	
 	return (
 		<div className="flex flex-wrap gap-8 justify-center items-center mt-10 mb-20">
-			{filteredProducts.map(product => (
-				<ProductCard key={product.slug} product={product} />
-			))}
+			{filteredProducts.length > 0 ? (
+				filteredProducts.map(product => (
+					<ProductCard key={product.slug} product={product} />
+				))
+			) : (
+				<p className="text-gray-500">No products found in this category.</p>
+			)}
 		</div>
 	);
 };

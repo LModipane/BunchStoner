@@ -4,4 +4,5 @@ export const PRODUCT_CATEGORIES = [
 	'Strategy & Puzzle Games',
 	'Travel & Hydration',
 	'Accessories & Timer',
+	"Marchandise & Collectibles",
 ];
