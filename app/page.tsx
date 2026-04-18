@@ -45,7 +45,7 @@ export default async function Home() {
 		heroProductTitle,
 		heroProductDescription,
 		logoImageUrl,
-	} = await SanityClient.fetch<HeroType>(heroProductQuery);
+	} = await SanityClient.fetch<HeroType>(heroProductQuery, { caches: 'no-store' });
 
 	const inventoryQuery = `*[_type == "inventory"]{
 		name,
@@ -107,7 +107,9 @@ export default async function Home() {
 						<button className="bg-green-950 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-900 transition cursor-pointer">
 							Checkout
 						</button>
-						<a href="#collections" className="text-green-950 px-6 py-3 ml-4 underline font-medium hover:text-green-800 transition cursor-pointer">
+						<a
+							href="#collections"
+							className="text-green-950 px-6 py-3 ml-4 underline font-medium hover:text-green-800 transition cursor-pointer">
 							Explore
 						</a>
 					</div>
@@ -135,7 +137,9 @@ export default async function Home() {
 					</div>
 				</div>
 			</header>
-			<section id="collections" className="min-h-screen w-full bg-white text-black flex flex-col items-center">
+			<section
+				id="collections"
+				className="min-h-screen w-full bg-white text-black flex flex-col items-center">
 				<div className="flex flex-col items-center mt-5 px-4 text-center">
 					<h2 className="text-3xl font-extrabold mt-20 text-green-950">Product Collections</h2>
 					<p className="text-gray-500 text-lg mt-4 mb-5">
@@ -157,5 +161,3 @@ export default async function Home() {
 		</main>
 	);
 }
-
-
